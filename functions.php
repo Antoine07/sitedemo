@@ -67,8 +67,8 @@ function al_codex_artiste_init() {
         'capability_type'    => 'post',
         'has_archive'        => true,
         'hierarchical'       => false,
-        'menu_position'      => null,
-        'supports'           => [ 'title', 'editor', 'author', 'thumbnail', 'excerpt' ],
+        'menu_position'      => 2,
+        'supports'           => [ 'title', 'editor', 'author', 'thumbnail' ],
     ];
  
     register_post_type( 'artiste', $args );
