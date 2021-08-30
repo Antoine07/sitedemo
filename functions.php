@@ -20,7 +20,6 @@ function atypikhouseSite_register_assets()
 };
 add_action('wp_enqueue_scripts', 'atypikhouseSite_register_assets');
 
-
 function register_my_menus()
 {
     register_nav_menus(
@@ -75,3 +74,35 @@ function al_codex_artiste_init() {
 }
  
 add_action( 'init', 'al_codex_artiste_init' );
+
+// taxonomie
+function create_country_hierarchical_taxonomy()
+{
+
+	$labels = [
+		'name' => "pays",
+		'singular_name' => "Pays",
+		'search_items' =>  "rechercher un pays",
+		'all_items' => "Tous les pays",
+		'parent_item' => "Le parent de pays",
+		'parent_item_colon' => "Pays:",
+		'edit_item' => "Editer un pays",
+		'update_item' => "Mettre à jour un pays",
+		'add_new_item' =>"ajouter un pays",
+		'new_item_name' => "Nous pays",
+		'menu_name' => "Pays",
+	];
+
+	// Créer la taxonomy est l'associer à un/des CPT ou post
+	register_taxonomy('country', ['artiste'], [
+		'hierarchical' => true, // ou false si c'est faux alors c'est comme des étiquettes ou tags
+		'labels' => $labels,
+		'show_ui' => true,
+		'show_in_rest' => true,
+		'show_admin_column' => true,
+		'query_var' => true,
+		'rewrite' => ['slug' => 'countries'],
+	]);
+}
+
+add_action('init', 'create_country_hierarchical_taxonomy');

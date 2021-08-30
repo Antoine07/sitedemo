@@ -44,3 +44,43 @@ function al_codex_artiste_init() {
 // HOOK init et qui permet de lancer une fonction qui va faire quelque chose dans le noyau de WP
 add_action( 'init', 'al_codex_artiste_init' );
 ```
+
+## Taxonomy
+
+Ils créent des termes permettant de catégoriser des contenus sous forme d'étiquette ou de hierarchie. Par exemple les articles dans WP peuvent être ranger dans une catégorie, c'est un terme de la taxonomie générique qu'est la catégorie.
+
+```js
+
+function create_country_hierarchical_taxonomy()
+{
+
+	$labels = [
+		'name' => "pays",
+		'singular_name' => "Pays",
+		'search_items' =>  "rechercher un pays",
+		'all_items' => "Tous les pays",
+		'parent_item' => "Le parent de pays",
+		'parent_item_colon' => "Pays:",
+		'edit_item' => "Editer un pays",
+		'update_item' => "Mettre à jour un pays",
+		'add_new_item' =>"ajouter un pays",
+		'new_item_name' => "Nous pays",
+		'menu_name' => "Pays",
+	];
+
+	// Créer la taxonomy est l'associer à un/des CPT ou post
+	register_taxonomy('country', ['artiste', 'post'], [
+		'hierarchical' => true, // ou false si c'est faux alors c'est comme des étiquettes ou tags
+		'labels' => $labels,
+		'show_ui' => true,
+		'show_in_rest' => true,
+		'show_admin_column' => true,
+		'query_var' => true,
+		'rewrite' => ['slug' => 'countries'],
+	]);
+}
+
+add_action('init', 'create_country_hierarchical_taxonomy');
+```
+
+## Affichez les CPT en page d'accueil
