@@ -14,3 +14,9 @@
             'container'       => 'nav', // wrapper nav
             'container_class' => 'nav-main nav-collapse',
 ]); ?>
+
+<?php wp_nav_menu([
+            'theme_location'  => 'main_country',
+            'container'       => 'nav', // wrapper nav
+            'container_class' => 'nav-main nav-collapse',
+]); ?>
